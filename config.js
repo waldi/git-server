@@ -10,23 +10,23 @@
  * governing permissions and limitations under the License.
  */
 
-'use strict';
+"use strict";
 
 module.exports = {
-  appTitle: 'Helix Git Server',
-  repoRoot: './repos',
+  appTitle: "Helix Git Server",
+  repoRoot: "./repos",
   // repository mapping. allows to 'mount' repositories outside the 'repoRoot' structure.
   virtualRepos: {
     demoOwner: {
       demoRepo: {
-        path: './virtual/example',
+        path: "./virtual/example",
       },
     },
   },
   listen: {
     http: {
-      port: 5000,
-      host: '0.0.0.0',
+      port: 9527,
+      host: "0.0.0.0",
     },
     /*
     // https is optional
@@ -46,15 +46,15 @@ module.exports = {
     enable: true,
     baseDomains: [
       // some wildcarded DNS domains resolving to 127.0.0.1
-      'localtest.me',
-      'lvh.me',
-      'vcap.me',
-      'lacolhost.com',
+      "localtest.me",
+      "lvh.me",
+      "vcap.me",
+      "lacolhost.com",
     ],
   },
   logs: {
-    level: 'info', // fatal, error, warn, info, verbose, debug, trace
-    logsDir: './logs',
-    reqLogFormat: 'short', // used for morgan (request logging)
+    level: "info", // fatal, error, warn, info, verbose, debug, trace
+    logsDir: "./logs",
+    reqLogFormat: "short", // used for morgan (request logging)
   },
 };

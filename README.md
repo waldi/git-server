@@ -3,6 +3,7 @@
 A GitHub Protocol & API emulation.
 
 <!-- TOC -->
+
 - [Status](#status)
 - [Description](#description)
 - [Installation](#installation)
@@ -16,9 +17,10 @@ A GitHub Protocol & API emulation.
     - [`git push` support](#git-push-support)
   - [3. GitHub API v3](#3-github-api-v3)
   - [4. GitHub-like Web Server](#4-github-like-web-server)
-<!-- /TOC -->
+  <!-- /TOC -->
 
 ---
+
 ## Status
 
 [![codecov](https://img.shields.io/codecov/c/github/adobe/git-server.svg)](https://codecov.io/gh/adobe/git-server)
@@ -67,9 +69,9 @@ The repository contents can be accessed with the same url patterns you would use
 
 The following protocols and APIs are currently supported:
 
-* [Git Raw protocol](#1-git-raw-protocol)
-* [Git HTTP Transfer Protocols](#2-git-http-transfer-protocols)
-* [GitHub API v3](#3-github-api-v3)
+- [Git Raw protocol](#1-git-raw-protocol)
+- [Git HTTP Transfer Protocols](#2-git-http-transfer-protocols)
+- [GitHub API v3](#3-github-api-v3)
 
 ## Installation
 
@@ -96,7 +98,7 @@ npm install
   },
   listen: {
     http: {
-      port: 5000,
+      port: 9527,
       host: '0.0.0.0',
     },
     /*
@@ -158,7 +160,7 @@ npm start
 ### 3. Fetch raw content of file in Git repo over http
 
 ```bash
-curl http://localhost:5000/raw/helix/test/main/README.md
+curl http://localhost:9527/raw/helix/test/main/README.md
 ```
 
 ## Git Protocols and APIs
@@ -169,34 +171,34 @@ Serving content of a file in a git repo.
 
 The requested file is specified by:
 
-* `{owner}`: GitHub organization or user
-* `{repo}`: repository name
-* `{ref}`: Git reference
-  * branch name (e.g. `main`)
-  * tag name (e.g. `v1.0`)
-  * (full or shorthand) commit id (e.g. `7aeff3d`)
+- `{owner}`: GitHub organization or user
+- `{repo}`: repository name
+- `{ref}`: Git reference
+  - branch name (e.g. `main`)
+  - tag name (e.g. `v1.0`)
+  - (full or shorthand) commit id (e.g. `7aeff3d`)
 
 GitHub URLs:
 
-* `https://raw.githubusercontent.com/{owner}/{repo}/{ref}/path/to/file`
-* `https://github.com/{owner}/{repo}/raw/{ref}/path/to/file`
+- `https://raw.githubusercontent.com/{owner}/{repo}/{ref}/path/to/file`
+- `https://github.com/{owner}/{repo}/raw/{ref}/path/to/file`
 
 Local `git-server` URLs:
 
-* `http://localhost:{port}/raw/{owner}/{repo}/{ref}/path/to/file`
-* `http://localhost:{port}/{owner}/{repo}/raw/{ref}/path/to/file`
-* `http://raw.localtest.me:{port}/{owner}/{repo}/{ref}/path/to/file` (using wildcarded DNS domain resolving to `127.0.0.1`)
+- `http://localhost:{port}/raw/{owner}/{repo}/{ref}/path/to/file`
+- `http://localhost:{port}/{owner}/{repo}/raw/{ref}/path/to/file`
+- `http://raw.localtest.me:{port}/{owner}/{repo}/{ref}/path/to/file` (using wildcarded DNS domain resolving to `127.0.0.1`)
 
 Remote examples:
 
-* `https://raw.githubusercontent.com/adobe/git-server/main/README.md`
-* `https://github.com/adobe/git-server/raw/main/README.md`
+- `https://raw.githubusercontent.com/adobe/git-server/main/README.md`
+- `https://github.com/adobe/git-server/raw/main/README.md`
 
 Local examples:
 
-* `http://raw.localtest.me:5000/adobe/git-server/main/README.md`
-* `http://localhost:5000/adobe/git-server/raw/main/README.md`
-* `http://localhost:5000/raw/adobe/git-server/main/README.md`
+- `http://raw.localtest.me:9527/adobe/git-server/main/README.md`
+- `http://localhost:9527/adobe/git-server/raw/main/README.md`
+- `http://localhost:9527/raw/adobe/git-server/main/README.md`
 
 `raw.githubusercontent.com` serves certain file types (e.g. JavaScript, CSS, HTML) with incorrect `Content-Type: text/plain` header. 3rd party solutions like `rawgit.com` address this issue. `git-server` serves files with correct content type.
 
@@ -206,12 +208,12 @@ Support for `git clone, push, fetch`
 
 Documentation:
 
-* [10.6 Git Internals - Transfer Protocols](https://git-scm.com/book/en/v2/Git-Internals-Transfer-Protocols)
-* [Git HTTP transport protocol documentation](https://github.com/git/git/blob/master/Documentation/technical/http-protocol.txt)
+- [10.6 Git Internals - Transfer Protocols](https://git-scm.com/book/en/v2/Git-Internals-Transfer-Protocols)
+- [Git HTTP transport protocol documentation](https://github.com/git/git/blob/master/Documentation/technical/http-protocol.txt)
 
 #### `git push` support
 
-The served local repo needs to be either a *bare* repo (`git clone --bare` or `git init --bare`) or the following option needs to be set:
+The served local repo needs to be either a _bare_ repo (`git clone --bare` or `git init --bare`) or the following option needs to be set:
 
 ```bash
 git config receive.denyCurrentBranch updateInstead
@@ -229,32 +231,32 @@ Local endpoint: `http://localhost:{port}/api` or e.g. `http://api.localtest.me:{
 
 Only a small subset of the GitHub API will be supported:
 
-* [Get contents](https://developer.github.com/v3/repos/contents/#get-contents)
+- [Get contents](https://developer.github.com/v3/repos/contents/#get-contents)
 
   _Note:_ The GitHub implementation supports files up to 1 megabyte in size.
 
-* [Get blob](https://developer.github.com/v3/git/blobs/#get-a-blob)
+- [Get blob](https://developer.github.com/v3/git/blobs/#get-a-blob)
 
   _Note:_ The GitHub implementation supports blobs up to 100 megabytes in size.
 
-* [Get tree](https://developer.github.com/v3/git/trees/#get-a-tree-recursively)
+- [Get tree](https://developer.github.com/v3/git/trees/#get-a-tree-recursively)
 
-* [Get commits](https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository)
+- [Get commits](https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository)
 
-* [Get archive link](https://developer.github.com/v3/repos/contents/#get-archive-link)
+- [Get archive link](https://developer.github.com/v3/repos/contents/#get-archive-link)
 
-  _Note:_  This method returns a `302` to a URL to download a tarball or zipball archive for a repository. `git-server` also supports an unofficial `https://codeload.github.com` endpoint that is not rate limited and that doesn't redirect:
+  _Note:_ This method returns a `302` to a URL to download a tarball or zipball archive for a repository. `git-server` also supports an unofficial `https://codeload.github.com` endpoint that is not rate limited and that doesn't redirect:
 
-  * `https://codeload.github.com/{owner}/{repo}/[zip|tar.gz]/main`
+  - `https://codeload.github.com/{owner}/{repo}/[zip|tar.gz]/main`
 
   Related issue/discussion: [#5 Support codeload.github.com](https://github.com/adobe/git-server/issues/5#issuecomment-403072428)
 
 Local examples:
 
-* `http://api.localtest.me:5000/repos/adobe/git-server/contents/README.md?ref=main`
-* `http://api.localtest.me:5000/repos/adobe/project-helix/git/blobs/bf13fe66cbee379db6a3e4ebf0300b8bbc0f01b7`
-* `http://localhost:5000/api/repos/adobe/git-server/contents/README.md?ref=main`
-* `http://localhost:5000/api/repos/adobe/project-helix/git/blobs/bf13fe66cbee379db6a3e4ebf0300b8bbc0f01b7`
+- `http://api.localtest.me:9527/repos/adobe/git-server/contents/README.md?ref=main`
+- `http://api.localtest.me:9527/repos/adobe/project-helix/git/blobs/bf13fe66cbee379db6a3e4ebf0300b8bbc0f01b7`
+- `http://localhost:9527/api/repos/adobe/git-server/contents/README.md?ref=main`
+- `http://localhost:9527/api/repos/adobe/project-helix/git/blobs/bf13fe66cbee379db6a3e4ebf0300b8bbc0f01b7`
 
 ### 4. GitHub-like Web Server
 
@@ -264,5 +266,5 @@ Endpoint: `https://github.com/`
 
 e.g.
 
-  `https://github.com/{owner}/{repo}`,
-  `https://github.com/{owner}/{repo}/blob/{branch}/path/to/file`
+`https://github.com/{owner}/{repo}`,
+`https://github.com/{owner}/{repo}/blob/{branch}/path/to/file`
