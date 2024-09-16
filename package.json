@@ -1,7 +1,7 @@
 {
   "name": "@waldi/git-server",
   "version": "1.0.0",
-  "description": "serve a git repository over http(s)",
+  "description": "Serve a git repository over http(s)",
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js",
