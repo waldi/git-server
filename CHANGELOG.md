@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/waldi/git-server/compare/v1.0.0...v1.0.1) (2024-09-16)
+
+
+### Bug Fixes
+
+* **package:** description ([472584c](https://github.com/waldi/git-server/commit/472584c393bd67ddcf1b2f37ca30a32b0942e3d9))
+
 # 1.0.0 (2024-09-16)
 
 
