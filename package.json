@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adobe/git-server.git"
+    "url": "https://github.com/waldi/git-server.git"
   },
   "license": "Apache-2.0",
   "dependencies": {
